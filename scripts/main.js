@@ -7,7 +7,7 @@ const svg = d3.select("svg"),
 const projection = d3.geoMercator()
     .center([-2, 54])                // GPS of location to zoom on - somewhere in the north of Englandish
     .scale(1400)                       // This is like the zoom
-    .translate([ width/2, height/2 ])
+    .translate([ width/2, height/2 ]);
 
 
 const button = document.querySelector('button');
@@ -19,7 +19,7 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
 
 
     //Combine the NI and GB data
-    data.features.push(...ireland_data.features)
+    data.features.push(...ireland_data.features);
 
     // Draw the map
     svg.append("g")
@@ -30,9 +30,9 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
           .attr("d", d3.geoPath()
               .projection(projection)
           )
-        .style("stroke", "none")
+        .style("stroke", "none");
 
-        plot_towns(50)
+    plot_towns(50);
 
     })
 })
@@ -55,5 +55,5 @@ function plot_towns(num_towns){
 }
 
 function reload_button_click(){
-    plot_towns(50)
+    plot_towns(50);
 }
