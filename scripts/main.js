@@ -9,9 +9,14 @@ const projection = d3.geoMercator()
     .scale(1400)                       // This is like the zoom
     .translate([ width/2, height/2 ]);
 
+var slider = document.getElementById("num_town_input");
+var output = document.getElementById("num_town_output");
 
 const button = document.querySelector('button');
+
 button.addEventListener('click', reload_button_click);
+slider.addEventListener("input", change_num_towns);
+
 
 // Load geography data for Great Britain and northern Ireland
 d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/administrative/ni/lgd.json").then( function(ireland_data){
@@ -32,7 +37,7 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
           )
         .style("stroke", "none");
 
-    plot_towns(50);
+    plot_towns(slider.value);
 
     })
 })
@@ -41,19 +46,23 @@ function plot_towns(num_towns){
     console.log("plotting " + num_towns + " towns");
     d3.json("http://34.38.72.236/Circles/Towns/" + num_towns).then( function(towns_data){
             
-    var circles = svg.selectAll("circle").data(towns_data).join('circle');
+        var circles = svg.selectAll("circle").data(towns_data).join('circle');
 
-    //Convert the lat and long in the same way as the map and set circle positions
+        //Convert the lat and long in the same way as the map and set circle positions
 
-    circles.attr("cx", function(d) {
-        return projection([d.lng, d.lat])[0];
-    }).attr("cy", function(d) {
-        return projection([d.lng, d.lat])[1];
-    }).attr("r", function(d) { return d.Population/20000 });
+        circles.attr("cx", function(d) {
+            return projection([d.lng, d.lat])[0];
+        }).attr("cy", function(d) {
+            return projection([d.lng, d.lat])[1];
+        }).attr("r", function(d) { return d.Population/20000 });
 
-})
+    })
 }
 
 function reload_button_click(){
-    plot_towns(50);
+    plot_towns(slider.value);
+}
+
+function change_num_towns(){
+    output.innerHTML = slider.value;
 }
