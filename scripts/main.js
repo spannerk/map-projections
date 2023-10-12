@@ -28,18 +28,21 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
           )
         .style("stroke", "none")
 
-        d3.json("http://34.38.72.236/Circles/Towns/50").then( function(towns_data){
-            
-            var circles = svg.selectAll("circle").data(towns_data).enter()
-			.append("circle");
-
-            circles.attr("cx", function(d) {
-                return projection([d.lng, d.lat])[0];
-            }).attr("cy", function(d) {
-                return projection([d.lng, d.lat])[1];
-            }).attr("r", function(d) { return d.Population/20000 });
-
-        })
+        plot_towns(50)
     })
 })
 
+function plot_towns(num_towns){
+    d3.json("http://34.38.72.236/Circles/Towns/" + num_towns).then( function(towns_data){
+            
+    var circles = svg.selectAll("circle").data(towns_data).enter()
+    .append("circle");
+
+    circles.attr("cx", function(d) {
+        return projection([d.lng, d.lat])[0];
+    }).attr("cy", function(d) {
+        return projection([d.lng, d.lat])[1];
+    }).attr("r", function(d) { return d.Population/20000 });
+
+})
+}
