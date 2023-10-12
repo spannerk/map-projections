@@ -43,7 +43,7 @@ function plot_towns(num_towns){
             
     var circles = svg.selectAll("circle").data(towns_data).join('circle');
 
-    //Convert the lat and long in the same way as the map
+    //Convert the lat and long in the same way as the map and set circle positions
 
     circles.attr("cx", function(d) {
         return projection([d.lng, d.lat])[0];
