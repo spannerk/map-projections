@@ -9,6 +9,10 @@ const projection = d3.geoMercator()
     .scale(1400)                       // This is like the zoom
     .translate([ width/2, height/2 ])
 
+
+const button = document.querySelector('button');
+button.addEventListener('click', reload_button_click);
+
 // Load geography data for Great Britain and northern Ireland
 d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/administrative/ni/lgd.json").then( function(ireland_data){
     d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/administrative/gb/lad.json").then( function(data){
@@ -34,10 +38,10 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
 })
 
 function plot_towns(num_towns){
+    console.log("plotting " + num_towns + " towns");
     d3.json("http://34.38.72.236/Circles/Towns/" + num_towns).then( function(towns_data){
             
-    var circles = svg.selectAll("circle").data(towns_data).enter()
-    .append("circle");
+    var circles = svg.selectAll("circle").data(towns_data).join('circle');
 
     //Convert the lat and long in the same way as the map
 
@@ -48,4 +52,8 @@ function plot_towns(num_towns){
     }).attr("r", function(d) { return d.Population/20000 });
 
 })
+}
+
+function reload_button_click(){
+    plot_towns(50)
 }
