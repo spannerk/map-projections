@@ -12,6 +12,8 @@ const projection = d3.geoMercator()
 var slider = document.getElementById("num_town_input");
 var output = document.getElementById("num_town_output");
 
+var town_details = document.getElementById("town_details");
+
 const button = document.querySelector('button');
 
 button.addEventListener('click', reload_button_click);
@@ -56,6 +58,8 @@ function plot_towns(num_towns){
             return projection([d.lng, d.lat])[1];
         }).attr("r", function(d) { return d.Population/20000 });
 
+        circles.on("click",  (event) => update_detail(event));
+
     })
 }
 
@@ -65,4 +69,9 @@ function reload_button_click(){
 
 function change_num_towns(){
     output.innerHTML = slider.value;
+}
+
+function update_detail(e){
+    town_details.innerHTML = "<p>" + e.srcElement.__data__.Town + "</p>";
+
 }
