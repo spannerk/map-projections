@@ -3,13 +3,13 @@ const svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
-// Map and projection
+// Projection to convert between lat/long coords and pixels in 2D map
 const projection = d3.geoMercator()
-    .center([-2, 54])                // GPS of location to zoom on
+    .center([-2, 54])                // GPS of location to zoom on - somewhere in the north of Englandish
     .scale(1400)                       // This is like the zoom
     .translate([ width/2, height/2 ])
 
-// Load external data and boot
+// Load geography data for Great Britain and northern Ireland
 d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/administrative/ni/lgd.json").then( function(ireland_data){
     d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/administrative/gb/lad.json").then( function(data){
 
@@ -29,6 +29,7 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
         .style("stroke", "none")
 
         plot_towns(50)
+
     })
 })
 
@@ -37,6 +38,8 @@ function plot_towns(num_towns){
             
     var circles = svg.selectAll("circle").data(towns_data).enter()
     .append("circle");
+
+    //Convert the lat and long in the same way as the map
 
     circles.attr("cx", function(d) {
         return projection([d.lng, d.lat])[0];
