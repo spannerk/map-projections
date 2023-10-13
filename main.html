@@ -4,19 +4,20 @@
 <!-- Load d3.js -->
 
 <script type ="text/javascript" src = "scripts/d3.v7.min.js"></script> 
+<link rel="stylesheet" href="style.css" />
 
-
-<!-- Create an element where the map will take place -->
-<svg id="my_dataviz" width="800" height="700"></svg>
-
-<div id="map_controls">
-    <input type="range" min="1" max="500" value="50" id="num_town_input">
-    <p>Number of towns to load: <span id="num_town_output">50</span></p>
-    <button>Load new towns</button> 
+<div class="column left">
+    <!-- Create an element where the map will take place -->
+    <svg id="my_dataviz" width="800" height="700"></svg>
 </div>
 
-<div id="town_details">
+<div class="column right">
+    <div id="map_controls">
+        <input type="range" min="1" max="500" value="50" id="num_town_input">
+        <p>Number of towns to load: <span id="num_town_output">50</span></p>
+        <button>Load new towns</button> 
+    </div>
 
+    <div id="town_details"></div>
 </div>
-
 <script type ="text/javascript" src = "scripts/main.js"></script> 
