@@ -6,10 +6,10 @@
 
 body {
   font-family: 'Muli', sans-serif;
-  background-color: #8D7D52;
+  background-color: #261A28;
 }
 
-/* Create two unequal columns that floats next to each other */
+/* Create columns that float next to each other */
 .column {
   float: left;
   padding: 10px;
@@ -17,24 +17,45 @@ body {
 
 /* Right column */
 .column.right {
-  width: 50%;
+  width: 25%;
 }
 
 /* Left column */
 .column.left {
-  width: 50%;
+  width: 40%;
+}
+/* Middle column */
+.column.middle {
+  width: 35%;
 }
 
-/* Clear floats after the columns */
-.row::after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+/* Responsive layout - makes the columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .column.left, .column.right {
+  .column.left, .column.middle, .column.right {
     width: 100%;
   }
+}
+
+#middle_pane {
+  background-color: #261A28;
+  padding: 50px;
+  border-radius: 40px;
+  color: white;
+}
+.subsection {
+  padding: 30px;
+}
+button {
+  background-color: #C43333;
+  border-radius: 10px;
+  color: white;
+
+}
+input[type="range"]{
+  accent-color: #C43333;
+  width: 200px;
+}
+span {
+  padding-left: 10px
 }

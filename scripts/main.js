@@ -6,7 +6,7 @@ const svg = d3.select("svg"),
 // Projection to convert between lat/long coords and pixels in 2D map
 const projection = d3.geoMercator()
     .center([-2, 54])                // GPS of location to zoom on - somewhere in the north of Englandish
-    .scale(1400)                       // This is like the zoom
+    .scale(1900)                       // This is like the zoom
     .translate([ width/2, height/2 ]);
 
 var slider = document.getElementById("num_town_input");
