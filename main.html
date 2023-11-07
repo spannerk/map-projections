@@ -4,19 +4,25 @@
 <!-- Load d3.js -->
 
 <script type ="text/javascript" src = "scripts/d3.v7.min.js"></script> 
+<link rel="stylesheet" href="style.css" />
 
-
-<!-- Create an element where the map will take place -->
-<svg id="my_dataviz" width="800" height="700"></svg>
-
-<div id="map_controls">
-    <input type="range" min="1" max="500" value="50" id="num_town_input">
-    <p>Number of towns to load: <span id="num_town_output">50</span></p>
-    <button>Load new towns</button> 
+<div class="column left" id="middle_pane">
+    <div id="map_controls" class="subsection">
+        <h1>UK Town Plotter</h1>
+        <input type="range" min="1" max="500" value="50" id="num_town_input"><span id="num_town_output">50</span>
+        <span><button>Go</button></span>
+    </div>
 </div>
 
-<div id="town_details">
+<div class="column middle">
+
+    <!-- Create an element where the map will take place -->
+    <svg id="my_dataviz" width="400" height="800"></svg>
 
 </div>
-
+<div class="column right">
+    <div id="town_details" class="subsection">
+        <p>Click on a circle to see details</p>
+    </div>
+</div>
 <script type ="text/javascript" src = "scripts/main.js"></script> 

@@ -6,7 +6,7 @@ const svg = d3.select("svg"),
 // Projection to convert between lat/long coords and pixels in 2D map
 const projection = d3.geoMercator()
     .center([-2, 54])                // GPS of location to zoom on - somewhere in the north of Englandish
-    .scale(1400)                       // This is like the zoom
+    .scale(1900)                       // This is like the zoom
     .translate([ width/2, height/2 ]);
 
 var slider = document.getElementById("num_town_input");
@@ -33,7 +33,7 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
         .selectAll("path")
         .data(data.features)
         .join("path")
-          .attr("fill", "lightgrey")
+          .attr("fill", "#7DB18F")
           .attr("d", d3.geoPath()
               .projection(projection)
           )
@@ -56,7 +56,8 @@ function plot_towns(num_towns){
             return projection([d.lng, d.lat])[0];
         }).attr("cy", function(d) {
             return projection([d.lng, d.lat])[1];
-        }).attr("r", function(d) { return d.Population/20000 });
+        }).attr("r", function(d) { return d.Population/20000;
+        }).attr("fill", "#111C2D");
 
         circles.on("click",  (event) => update_detail(event));
 
