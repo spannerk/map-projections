@@ -6,7 +6,7 @@ const svg = d3.select("svg"),
 // Projection to convert between lat/long coords and pixels in 2D map
 const projection = d3.geoMercator()
     .center([-2, 54])                // GPS of location to zoom on - somewhere in the north of Englandish
-    .scale(1900)                       // This is like the zoom
+    .scale(1900)                       // How zoomed in the map is
     .translate([ width/2, height/2 ]);
 
 var slider = document.getElementById("num_town_input");
@@ -28,6 +28,9 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
     //Combine the NI and GB data
     data.features.push(...ireland_data.features);
 
+    // clear the loading animation
+    svg.selectAll("*").remove();
+
     // Draw the map
     svg.append("g")
         .selectAll("path")
@@ -47,6 +50,8 @@ d3.json("https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/admin
 function plot_towns(num_towns){
     console.log("plotting " + num_towns + " towns");
     d3.json("http://34.38.72.236/Circles/Towns/" + num_towns).then( function(towns_data){
+
+        clear_detail();
             
         var circles = svg.selectAll("circle").data(towns_data).join('circle');
 
@@ -58,6 +63,8 @@ function plot_towns(num_towns){
             return projection([d.lng, d.lat])[1];
         }).attr("r", function(d) { return d.Population/20000;
         }).attr("fill", "#111C2D");
+
+        shine_circle(circles);
 
         circles.on("click",  (event) => update_detail(event));
 
@@ -73,6 +80,24 @@ function change_num_towns(){
 }
 
 function update_detail(e){
-    town_details.innerHTML = "<p>" + e.srcElement.__data__.Town + "</p>";
+    town_details.innerHTML = "<p>Town: " + e.srcElement.__data__.Town + "</p>";
+
+}
+
+function clear_detail(){
+    town_details.innerHTML = "<p>Click on a circle to see details</p>";
+}
+
+function shine_circle(c) {
+    c.transition()
+        .ease(d3.easeCubic)
+        .duration(200)
+        .attr("fill","#404956")
+    
+    c.transition()
+        .ease(d3.easeCubic)
+        .delay(200)
+        .duration(200)
+        .attr("fill","#111C2D")
 
 }
