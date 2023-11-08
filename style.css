@@ -17,12 +17,12 @@ body {
 
 /* Right column */
 .column.right {
-  width: 25%;
+  width: 45%;
 }
 
 /* Left column */
 .column.left {
-  width: 40%;
+  width: 20%;
 }
 /* Middle column */
 .column.middle {
@@ -44,8 +44,16 @@ body {
   color: white;
 }
 .subsection {
-  padding: 30px;
+  padding: 10px;
   color: white;
+}
+.subsection.left {
+  float: left;
+  width: 30%;
+}
+.subsection.right {
+  float: left;
+  width: 70%;
 }
 button {
   background-color: #C43333;
@@ -59,4 +67,14 @@ input[type="range"]{
 }
 span {
   padding-left: 10px
+}
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+iframe {
+  border-radius: 4px;
+  padding: 5px;
 }
